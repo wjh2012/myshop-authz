@@ -2,17 +2,19 @@ package ggomg.myshopauthz.controller.keyProvider;
 
 import static ggomg.myshopauthz.key.KeyMaker.keyPair;
 
-import java.util.Arrays;
+import java.security.PublicKey;
+import java.util.Base64;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class KeyProvideController {
 
-    @GetMapping("/pulickey")
+    @GetMapping("/publicKey")
     public String distributeKey(){
-        return Arrays.toString(keyPair.getPublic().getEncoded());
+        PublicKey key = keyPair.getPublic();
+        return Base64.getEncoder().encodeToString(key.getEncoded());
     }
 }
