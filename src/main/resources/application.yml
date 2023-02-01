@@ -5,11 +5,20 @@ spring:
   redis:
     host: localhost
     port: 6379
-  datasource:
-    url: jdbc:mysql://localhost:3306/myshop_authz?serverTimezone=Asia/Seoul
-    username: root
-    password: 11111111
-    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      authentication-database: admin
+      database:
+      username:
+      password:
+
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/myshop_authz?serverTimezone=Asia/Seoul
+#    username: root
+#    password: 11111111
+#    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
@@ -18,8 +27,8 @@ spring:
       hibernate:
         format_sql: true
         use_sql_comments: true
-    show_sql: false # sout? ??
+    show_sql: false
 
 logging.level:
-  org.hibernate.SQL: debug # logger? ??
-  org.hibernate.type: trace # ?? ???? ?? ???
+  org.hibernate.SQL: debug
+  org.hibernate.type: trace
