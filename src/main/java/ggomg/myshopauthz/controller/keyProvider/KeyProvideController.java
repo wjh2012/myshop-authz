@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class KeyProvideController {
 
     @GetMapping("/publicKey")
-    public String distributeKey(){
+    public String distributeKey() {
         PublicKey key = keyPair.getPublic();
         return Base64.getEncoder().encodeToString(key.getEncoded());
     }
