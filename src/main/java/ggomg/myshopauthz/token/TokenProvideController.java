@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.controller.tokenProvider;
+package ggomg.myshopauthz.token;
 
 import ggomg.myshopauthz.token.TokenService;
 import lombok.RequiredArgsConstructor;

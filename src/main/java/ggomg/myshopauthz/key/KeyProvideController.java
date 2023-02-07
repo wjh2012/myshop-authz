@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.controller.keyProvider;
+package ggomg.myshopauthz.key;
 
 import static ggomg.myshopauthz.key.KeyMaker.keyPair;
 
