@@ -1,8 +1,8 @@
 package ggomg.myshopauthz.token;
 
-import ggomg.myshopauthz.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -11,7 +11,7 @@ public class TokenProvideController {
     private final TokenService tokenService;
 
     @GetMapping("/token")
-    public String authorize() {
-        return tokenService.create();
+    public String authorize(@RequestBody TokenRequest request) {
+        return tokenService.provideToken(request.getId());
     }
 }
