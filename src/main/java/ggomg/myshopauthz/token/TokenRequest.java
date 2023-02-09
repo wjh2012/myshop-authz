@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class TokenRequest {
-    private Long Id;
+    private Long id;
 }

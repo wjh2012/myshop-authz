@@ -1,7 +1,7 @@
 package ggomg.myshopauthz.token;
 
-import ggomg.myshopauthz.authority.User;
-import ggomg.myshopauthz.authority.UserRepository;
+import ggomg.myshopauthz.user.User;
+import ggomg.myshopauthz.user.UserRepository;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
