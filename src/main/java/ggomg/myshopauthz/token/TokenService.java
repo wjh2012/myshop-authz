@@ -14,12 +14,23 @@ public class TokenService {
     private final TokenMaker tokenMaker;
     private final UserRepository userRepository;
 
-    public String provideToken(Long id) {
+    public String provideAccessToken(Long id) {
         Optional<User> OptionalUser = userRepository.findById(id);
 
         if (OptionalUser.isPresent()) {
             User user = OptionalUser.get();
             return tokenMaker.createAccessToken(user.getId(), user.getRole());
+        } else {
+            throw new NoSuchElementException();
+        }
+    }
+
+    public String provideRefreshToken(Long id) {
+        Optional<User> OptionalUser = userRepository.findById(id);
+
+        if (OptionalUser.isPresent()) {
+            User user = OptionalUser.get();
+            return tokenMaker.createRefreshToken(user.getId(), user.getRole());
         } else {
             throw new NoSuchElementException();
         }
