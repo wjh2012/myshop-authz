@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.token;
+package ggomg.myshopauthz.token.DTO;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

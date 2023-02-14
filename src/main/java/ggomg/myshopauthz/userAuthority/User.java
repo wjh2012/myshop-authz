@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.user;
+package ggomg.myshopauthz.userAuthority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

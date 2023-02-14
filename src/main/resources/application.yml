@@ -8,6 +8,10 @@ spring:
     password: 11111111
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+  redis:
+    host: localhost
+    port: 6379
+
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -16,10 +20,6 @@ spring:
         format_sql: true
         use_sql_comments: true
     show_sql: false
-
-  redis:
-    host: localhost
-    port: 6379
 
 logging.level:
   org.hibernate.SQL: debug

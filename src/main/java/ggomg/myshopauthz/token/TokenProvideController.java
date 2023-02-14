@@ -2,6 +2,7 @@ package ggomg.myshopauthz.token;
 
 import ggomg.myshopauthz.token.DTO.AccessRefreshTokenDTO;
 import ggomg.myshopauthz.token.DTO.AccessTokenDTO;
+import ggomg.myshopauthz.token.DTO.TokenRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

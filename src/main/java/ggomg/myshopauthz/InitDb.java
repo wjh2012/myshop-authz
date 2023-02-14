@@ -1,6 +1,6 @@
 package ggomg.myshopauthz;
 
-import ggomg.myshopauthz.user.UserService;
+import ggomg.myshopauthz.userAuthority.UserService;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -24,15 +24,15 @@ public class InitDb {
         private final UserService userService;
 
         private void dbInit1() {
-            userService.createUser(1L,"manager");
-            userService.createUser(2L,"normal");
-            userService.createUser(3L,"manager");
-            userService.createUser(4L,"normal");
-            userService.createUser(5L,"manager");
-            userService.createUser(6L,"normal");
-            userService.createUser(7L,"manager");
-            userService.createUser(8L,"normal");
-            userService.createUser(9L,"manager");
+            userService.createUser(1L, "manager");
+            userService.createUser(2L, "normal");
+            userService.createUser(3L, "manager");
+            userService.createUser(4L, "normal");
+            userService.createUser(5L, "manager");
+            userService.createUser(6L, "normal");
+            userService.createUser(7L, "manager");
+            userService.createUser(8L, "normal");
+            userService.createUser(9L, "manager");
         }
     }
 }
