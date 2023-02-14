@@ -1,9 +1,11 @@
 package ggomg.myshopauthz.token;
 
-import ggomg.myshopauthz.user.User;
-import ggomg.myshopauthz.user.UserRepository;
+import static ggomg.myshopauthz.token.TokenMaker.createAccessToken;
+import static ggomg.myshopauthz.token.TokenMaker.createRefreshToken;
+
+import ggomg.myshopauthz.userAuthority.User;
+import ggomg.myshopauthz.userAuthority.UserRepository;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,29 +13,20 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TokenService {
 
-    private final TokenMaker tokenMaker;
     private final UserRepository userRepository;
 
     public String provideAccessToken(Long id) {
-        Optional<User> OptionalUser = userRepository.findById(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(NoSuchElementException::new);
 
-        if (OptionalUser.isPresent()) {
-            User user = OptionalUser.get();
-            return tokenMaker.createAccessToken(user.getId(), user.getRole());
-        } else {
-            throw new NoSuchElementException();
-        }
+        return createAccessToken(user.getId(), user.getRole());
     }
 
     public String provideRefreshToken(Long id) {
-        Optional<User> OptionalUser = userRepository.findById(id);
+        User user = userRepository.findById(id)
+                .orElseThrow(NoSuchElementException::new);
 
-        if (OptionalUser.isPresent()) {
-            User user = OptionalUser.get();
-            return tokenMaker.createRefreshToken(user.getId(), user.getRole());
-        } else {
-            throw new NoSuchElementException();
-        }
+        return createRefreshToken(user.getId(), user.getRole());
     }
 
 }
