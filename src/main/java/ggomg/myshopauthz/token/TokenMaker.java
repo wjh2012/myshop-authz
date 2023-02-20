@@ -20,11 +20,16 @@ public class TokenMaker {
         return Jwts.builder()
                 .setHeaderParam("alg", SignatureAlgorithm.RS256.getValue())
                 .setHeaderParam("typ", "JWT")
-                .setIssuer("myshop-authz") // 발급자
-                .claim("id", id)
+
+                .setIssuer("myshop-authz") // 발신
+                .setAudience("accessService") // 수신
+
+                .setSubject(id.toString())
                 .claim("role", role)
+
                 .setIssuedAt(Date.from(Instant.now()))
                 .setExpiration(Date.from(Instant.now().plusMillis(ACCESS_TOKEN_TIME_SPAN)))
+
                 .signWith(keyPair.getPrivate())
                 .compact();
     }
@@ -33,11 +38,16 @@ public class TokenMaker {
         return Jwts.builder()
                 .setHeaderParam("alg", SignatureAlgorithm.RS256.getValue())
                 .setHeaderParam("typ", "JWT")
-                .setIssuer("myshop-authz") // 발급자
-                .claim("id", id)
+
+                .setIssuer("myshop-authz") // 발신
+                .setAudience("refreshService") // 수신
+
+                .setSubject(id.toString())
                 .claim("role", role)
+
                 .setIssuedAt(Date.from(Instant.now()))
                 .setExpiration(Date.from(Instant.now().plusMillis(REFRESH_TOKEN_TIME_SPAN)))
+
                 .signWith(keyPair.getPrivate())
                 .compact();
     }
