@@ -1,9 +1,9 @@
 package ggomg.myshopauthz.token.refreshToken;
 
+import static ggomg.myshopauthz.token.key.KeyMaker.keyPair;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import java.net.URL;
-import java.net.URLConnection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +20,12 @@ public class RefreshTokenService {
     public String decodeRefreshToken(String refreshToken) {
 
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey()
+                .setSigningKey(keyPair.getPrivate())
                 .requireAudience("refreshService")
                 .build()
-                .parse(refreshToken)
+                .parseClaimsJws(refreshToken)
                 .getBody();
 
-        String subject = claims.getSubject();
+        return  claims.getSubject();
     }
 }
