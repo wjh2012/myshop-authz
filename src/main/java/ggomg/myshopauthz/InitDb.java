@@ -1,5 +1,8 @@
 package ggomg.myshopauthz;
 
+import static ggomg.myshopauthz.token.TokenMaker.createRefreshToken;
+
+import ggomg.myshopauthz.token.refreshToken.RedisTokenService;
 import ggomg.myshopauthz.userAuthority.UserService;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -9,21 +12,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 @RequiredArgsConstructor
 public class InitDb {
-    private final InitService initService;
+    private final InitMysql initMysql;
+    private final InitRedis initRedis;
 
     @PostConstruct
     public void init() {
-        initService.dbInit1();
+        initMysql.dbInit();
+        initRedis.dbInit();
     }
 
     @Component
     @RequiredArgsConstructor
     @Transactional
-    static class InitService {
+    static class InitMysql {
 
         private final UserService userService;
 
-        private void dbInit1() {
+        private void dbInit() {
             userService.createUser(1L, "manager");
             userService.createUser(2L, "normal");
             userService.createUser(3L, "manager");
@@ -35,4 +40,21 @@ public class InitDb {
             userService.createUser(9L, "manager");
         }
     }
+
+    @Component
+    @RequiredArgsConstructor
+    static class InitRedis {
+
+        private final RedisTokenService redisTokenService;
+
+        private void dbInit() {
+            String refreshToken1 = createRefreshToken(4L, "normal");
+            String refreshToken2 = createRefreshToken(5L, "normal");
+
+            redisTokenService.createRedisToken(4L, refreshToken1);
+            redisTokenService.createRedisToken(5L, refreshToken2);
+        }
+    }
+
+
 }
