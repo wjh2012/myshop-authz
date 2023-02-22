@@ -3,7 +3,10 @@ package ggomg.myshopauthz.token.key;
 import static ggomg.myshopauthz.token.key.KeyMaker.keyPair;
 
 import java.security.PublicKey;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,18 +20,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class KeyProvideController {
 
     @GetMapping("/publicKey")
-    public JWKey distributeKey() {
+    public Result distributeKey() {
         String key = Base64
                 .getEncoder()
                 .encodeToString(keyPair.getPublic().getEncoded());
 
-        return JWKey.builder()
+        JWKey jwKey = JWKey.builder()
                 .kid("123")
                 .alg("RS256")
                 .kty("RSA")
                 .use("enc")
-                .n(key.toString())
+                .n(key)
                 .build();
+
+        List<JWKey> collect = new ArrayList<>();
+        collect.add(jwKey);
+
+        return new Result(collect);
     }
 
     @Data
@@ -40,4 +48,11 @@ public class KeyProvideController {
         String use;
         String n;
     }
+
+    @Data
+    @AllArgsConstructor
+    static class Result<T>{
+        private T keys;
+    }
+
 }
