@@ -1,10 +1,11 @@
-package ggomg.myshopauthz.token.key;
+package ggomg.myshopauthz.key;
 
-import static ggomg.myshopauthz.token.key.KeyMaker.keyPair;
+import static ggomg.myshopauthz.key.KeyMaker.keyPair;
 
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,11 +24,11 @@ public class KeyProvideController {
                 .encodeToString(keyPair.getPublic().getEncoded());
 
         JWKey jwKey = JWKey.builder()
-                .kid("123")
-                .alg("RS256")
+                .kid(UUID.randomUUID().toString())
+                .alg(keyPair.getPublic().getAlgorithm())
                 .kty("RSA")
                 .use("enc")
-                .n(key)
+                .publicKey(key)
                 .build();
 
         List<JWKey> collect = new ArrayList<>();
@@ -43,7 +44,7 @@ public class KeyProvideController {
         String alg;
         String kty;
         String use;
-        String n;
+        String publicKey;
     }
 
     @Data
