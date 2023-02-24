@@ -5,7 +5,6 @@ import static ggomg.myshopauthz.token.TokenMaker.createRefreshToken;
 
 import ggomg.myshopauthz.userAuthority.User;
 import ggomg.myshopauthz.userAuthority.UserRepository;
-import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +16,14 @@ public class TokenService {
 
     public String provideAccessToken(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow(IllegalArgumentException::new);
 
         return createAccessToken(user.getId(), user.getRole());
     }
 
     public String provideRefreshToken(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow(IllegalArgumentException::new);
 
         return createRefreshToken(user.getId(), user.getRole());
     }
