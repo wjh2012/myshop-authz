@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.token.key;
+package ggomg.myshopauthz.key;
 
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
