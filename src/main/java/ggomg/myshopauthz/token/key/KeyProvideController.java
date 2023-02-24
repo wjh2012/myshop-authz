@@ -2,12 +2,9 @@ package ggomg.myshopauthz.token.key;
 
 import static ggomg.myshopauthz.token.key.KeyMaker.keyPair;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -41,7 +38,7 @@ public class KeyProvideController {
 
     @Data
     @Builder
-    static class JWKey{
+    static class JWKey {
         String kid;
         String alg;
         String kty;
@@ -51,7 +48,7 @@ public class KeyProvideController {
 
     @Data
     @AllArgsConstructor
-    static class Result<T>{
+    static class Result<T> {
         private T keys;
     }
 
