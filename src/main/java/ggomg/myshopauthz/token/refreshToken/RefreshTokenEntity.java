@@ -12,13 +12,13 @@ import org.springframework.data.redis.core.RedisHash;
 @RedisHash("memberId")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class RedisToken {
+public class RefreshTokenEntity {
     @Id
     private Long id;
     private String refreshToken;
 
-    public static RedisToken of(Long userId, String refreshToken) {
-        return new RedisToken(userId, refreshToken);
+    public static RefreshTokenEntity of(Long userId, String refreshToken) {
+        return new RefreshTokenEntity(userId, refreshToken);
     }
 
 }

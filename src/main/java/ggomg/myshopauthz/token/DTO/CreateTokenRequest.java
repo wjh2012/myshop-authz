@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class TokenRequest {
+public class CreateTokenRequest {
     private Long id;
 }

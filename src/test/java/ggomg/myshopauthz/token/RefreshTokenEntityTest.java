@@ -2,9 +2,8 @@ package ggomg.myshopauthz.token;
 
 import static ggomg.myshopauthz.token.TokenMaker.createRefreshToken;
 
-import ggomg.myshopauthz.token.refreshToken.RedisTokenRepository;
-import ggomg.myshopauthz.token.refreshToken.RedisTokenService;
-import javax.annotation.PreDestroy;
+import ggomg.myshopauthz.token.refreshToken.RefreshTokenRepository;
+import ggomg.myshopauthz.token.refreshToken.RefreshTokenService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,22 +12,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @Transactional
-public class RedisTokenTest {
+public class RefreshTokenEntityTest {
 
     @Autowired
-    RedisTokenService redisTokenService;
+    RefreshTokenService refreshTokenService;
     @Autowired
-    private RedisTokenRepository redisTokenRepository;
+    private RefreshTokenRepository refreshTokenRepository;
 
     @Test
     void refresh토큰발급(){
-        redisTokenRepository.deleteAll();
+        refreshTokenRepository.deleteAll();
 
         String refreshToken = createRefreshToken(1L,"normal");
 
-        redisTokenService.createRedisToken(1L, refreshToken);
+        refreshTokenService.saveRefreshToken(1L, refreshToken);
 
-        String result = redisTokenService.findRefreshTokenById(1L);
+        String result = refreshTokenService.findRefreshTokenById(1L);
 
         System.out.println("result = " + result);
         System.out.println("refreshToken = " + refreshToken);
