@@ -1,6 +1,6 @@
 package ggomg.myshopauthz.token;
 
-import static ggomg.myshopauthz.token.key.KeyMaker.keyPair;
+import static ggomg.myshopauthz.key.KeyMaker.keyPair;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

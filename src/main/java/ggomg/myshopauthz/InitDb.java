@@ -2,7 +2,7 @@ package ggomg.myshopauthz;
 
 import static ggomg.myshopauthz.token.TokenMaker.createRefreshToken;
 
-import ggomg.myshopauthz.token.refreshToken.RedisTokenService;
+import ggomg.myshopauthz.token.refreshToken.RefreshTokenService;
 import ggomg.myshopauthz.userAuthority.UserService;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -32,12 +32,6 @@ public class InitDb {
             userService.createUser(1L, "manager");
             userService.createUser(2L, "normal");
             userService.createUser(3L, "manager");
-            userService.createUser(4L, "normal");
-            userService.createUser(5L, "manager");
-            userService.createUser(6L, "normal");
-            userService.createUser(7L, "manager");
-            userService.createUser(8L, "normal");
-            userService.createUser(9L, "manager");
         }
     }
 
@@ -45,14 +39,11 @@ public class InitDb {
     @RequiredArgsConstructor
     static class InitRedis {
 
-        private final RedisTokenService redisTokenService;
+        private final RefreshTokenService refreshTokenService;
 
         private void dbInit() {
-            String refreshToken1 = createRefreshToken(4L, "normal");
-            String refreshToken2 = createRefreshToken(5L, "normal");
-
-            redisTokenService.createRedisToken(4L, refreshToken1);
-            redisTokenService.createRedisToken(5L, refreshToken2);
+            refreshTokenService.saveRefreshToken(8L, createRefreshToken(8L, "normal"));
+            refreshTokenService.saveRefreshToken(9L, createRefreshToken(9L, "manager"));
         }
     }
 
