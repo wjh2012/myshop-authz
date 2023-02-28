@@ -13,16 +13,16 @@ public class RefreshTokenService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     public void saveRefreshToken(Long userId, String refreshToken) {
-        RefreshTokenEntity refreshTokenEntity = RefreshTokenEntity.of(userId, refreshToken);
+        UserIdRefreshToken userIdRefreshToken = UserIdRefreshToken.of(userId, refreshToken);
 
-        refreshTokenRepository.save(refreshTokenEntity);
+        refreshTokenRepository.save(userIdRefreshToken);
     }
 
     public String findRefreshTokenById(Long userId) {
-        RefreshTokenEntity refreshTokenEntity = refreshTokenRepository.findById(userId)
+        UserIdRefreshToken userIdRefreshToken = refreshTokenRepository.findById(userId)
                 .orElseThrow(IllegalArgumentException::new);
 
-        return refreshTokenEntity.getRefreshToken();
+        return userIdRefreshToken.getRefreshToken();
     }
 
     public String getSubjectFromRefreshToken(String refreshToken) {
