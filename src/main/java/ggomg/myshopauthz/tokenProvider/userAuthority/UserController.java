@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.userAuthority;
+package ggomg.myshopauthz.tokenProvider.userAuthority;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,7 +1,7 @@
-package ggomg.myshopauthz.token;
+package ggomg.myshopauthz.tokenProvider;
 
-import ggomg.myshopauthz.token.DTO.CreateTokenRequest;
-import ggomg.myshopauthz.token.refreshToken.RefreshTokenService;
+import ggomg.myshopauthz.tokenProvider.controllerDTO.CreateTokenRequest;
+import ggomg.myshopauthz.tokenProvider.refreshToken.RefreshTokenService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class TokenProvideController {
-    private final TokenService tokenService;
+    private final TokenProvideService tokenProvideService;
     private final RefreshTokenService refreshTokenService;
 
     @PostMapping("/newToken")
     public ResponseEntity<AccessRefreshTokenDTO> newToken(@RequestBody CreateTokenRequest request) {
 
-        String accessToken = tokenService.provideAccessToken(request.getId());
-        String refreshToken = tokenService.provideRefreshToken(request.getId());
+        String accessToken = tokenProvideService.provideAccessToken(request.getId());
+        String refreshToken = tokenProvideService.provideRefreshToken(request.getId());
 
         refreshTokenService.saveRefreshToken(request.getId(), refreshToken);
 
@@ -33,8 +33,8 @@ public class TokenProvideController {
 
         refreshTokenService.findRefreshTokenById(request.getId());
 
-        String accessToken = tokenService.provideAccessToken(request.getId());
-        String refreshToken = tokenService.provideRefreshToken(request.getId());
+        String accessToken = tokenProvideService.provideAccessToken(request.getId());
+        String refreshToken = tokenProvideService.provideRefreshToken(request.getId());
 
         AccessRefreshTokenDTO response = new AccessRefreshTokenDTO(accessToken, refreshToken);
 

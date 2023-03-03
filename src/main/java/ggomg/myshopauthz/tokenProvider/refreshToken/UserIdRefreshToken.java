@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.token.refreshToken;
+package ggomg.myshopauthz.tokenProvider.refreshToken;
 
 import javax.persistence.Id;
 import lombok.AccessLevel;

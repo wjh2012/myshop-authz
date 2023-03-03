@@ -1,16 +1,16 @@
-package ggomg.myshopauthz.token;
+package ggomg.myshopauthz.tokenProvider;
 
-import static ggomg.myshopauthz.token.TokenMaker.createAccessToken;
-import static ggomg.myshopauthz.token.TokenMaker.createRefreshToken;
+import static ggomg.myshopauthz.tokenProvider.TokenMaker.createAccessToken;
+import static ggomg.myshopauthz.tokenProvider.TokenMaker.createRefreshToken;
 
-import ggomg.myshopauthz.userAuthority.User;
-import ggomg.myshopauthz.userAuthority.UserRepository;
+import ggomg.myshopauthz.tokenProvider.userAuthority.User;
+import ggomg.myshopauthz.tokenProvider.userAuthority.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class TokenService {
+public class TokenProvideService {
 
     private final UserRepository userRepository;
 

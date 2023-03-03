@@ -1,6 +1,6 @@
-package ggomg.myshopauthz.key;
+package ggomg.myshopauthz.tokenProvider.key;
 
-import static ggomg.myshopauthz.key.KeyMaker.keyPair;
+import static ggomg.myshopauthz.tokenProvider.key.KeyMaker.keyPair;
 
 import java.util.ArrayList;
 import java.util.Base64;

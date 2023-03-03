@@ -1,9 +1,9 @@
-package ggomg.myshopauthz.token;
+package ggomg.myshopauthz.tokenProvider;
 
-import static ggomg.myshopauthz.token.TokenMaker.createRefreshToken;
+import static ggomg.myshopauthz.tokenProvider.TokenMaker.createRefreshToken;
 
-import ggomg.myshopauthz.token.refreshToken.RefreshTokenRepository;
-import ggomg.myshopauthz.token.refreshToken.RefreshTokenService;
+import ggomg.myshopauthz.tokenProvider.refreshToken.RefreshTokenRepository;
+import ggomg.myshopauthz.tokenProvider.refreshToken.RefreshTokenService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

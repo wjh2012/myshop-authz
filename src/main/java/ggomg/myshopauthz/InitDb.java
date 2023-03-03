@@ -1,9 +1,9 @@
 package ggomg.myshopauthz;
 
-import static ggomg.myshopauthz.token.TokenMaker.createRefreshToken;
+import static ggomg.myshopauthz.tokenProvider.TokenMaker.createRefreshToken;
 
-import ggomg.myshopauthz.token.refreshToken.RefreshTokenService;
-import ggomg.myshopauthz.userAuthority.UserService;
+import ggomg.myshopauthz.tokenProvider.refreshToken.RefreshTokenService;
+import ggomg.myshopauthz.tokenProvider.userAuthority.UserService;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
