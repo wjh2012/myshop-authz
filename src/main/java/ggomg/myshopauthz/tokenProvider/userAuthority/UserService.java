@@ -10,25 +10,23 @@ public class UserService {
     private final UserRepository userRepository;
 
     public void deleteUser(Long id) {
-        if (userRepository.existsById(id)) {
-            userRepository.deleteById(id);
+        if (!userRepository.existsById(id)) {
+            throw new IllegalArgumentException("Can't delete. User not found");
         }
+        userRepository.deleteById(id);
     }
 
     public void updateUser(Long id, String role) {
-        if (userRepository.existsById(id)) {
-            userRepository.save(User.of(id, role));
+        if (!userRepository.existsById(id)) {
+            throw new IllegalArgumentException("Can't update. User not found");
         }
-    }
-
-    public void createUser(Long id, String role) {
-        validateDuplicated(id);
         userRepository.save(User.of(id, role));
     }
 
-    private void validateDuplicated(Long id) {
+    public void createUser(Long id, String role) {
         if (userRepository.existsById(id)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Can't create. User ID already exists");
         }
+        userRepository.save(User.of(id, role));
     }
 }
