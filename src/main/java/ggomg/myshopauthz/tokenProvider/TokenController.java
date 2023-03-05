@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class TokenProvideController {
-    private final TokenProvideService tokenProvideService;
+public class TokenController {
+    private final TokenService tokenService;
     private final RefreshTokenService refreshTokenService;
 
     @PostMapping("/newToken")
     public ResponseEntity<AccessRefreshTokenDTO> newToken(@RequestBody CreateTokenRequest request) {
 
-        String accessToken = tokenProvideService.provideAccessToken(request.getId());
-        String refreshToken = tokenProvideService.provideRefreshToken(request.getId());
+        String accessToken = tokenService.provideAccessToken(request.getId());
+        String refreshToken = tokenService.provideRefreshToken(request.getId());
 
         refreshTokenService.saveRefreshToken(request.getId(), refreshToken);
 
@@ -33,8 +33,8 @@ public class TokenProvideController {
 
         refreshTokenService.findRefreshTokenById(request.getId());
 
-        String accessToken = tokenProvideService.provideAccessToken(request.getId());
-        String refreshToken = tokenProvideService.provideRefreshToken(request.getId());
+        String accessToken = tokenService.provideAccessToken(request.getId());
+        String refreshToken = tokenService.provideRefreshToken(request.getId());
 
         AccessRefreshTokenDTO response = new AccessRefreshTokenDTO(accessToken, refreshToken);
 

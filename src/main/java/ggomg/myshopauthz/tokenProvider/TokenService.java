@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class TokenProvideService {
+public class TokenService {
 
     private final UserRepository userRepository;
 
