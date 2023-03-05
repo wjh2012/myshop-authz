@@ -1,6 +1,8 @@
 package ggomg.myshopauthz.tokenProvider.userAuthority;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,17 +14,32 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/createUser")
-    public void createUser(@RequestBody UserDTO request) {
-        userService.createUser(request.getId(), request.getRole());
+    public ResponseEntity<?> createUser(@RequestBody UserDTO request) {
+        try {
+            userService.createUser(request.getId(), request.getRole());
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/deleteUser")
-    public void deleteUser(@RequestBody UserDTO request) {
-        userService.deleteUser(request.getId());
+    public ResponseEntity<?> deleteUser(@RequestBody UserDTO request) {
+        try {
+            userService.deleteUser(request.getId());
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PostMapping("/updateUser")
-    public void updateUser(@RequestBody UserDTO request) {
-        userService.updateUser(request.getId(), request.getRole());
+    public ResponseEntity<?> updateUser(@RequestBody UserDTO request) {
+        try {
+            userService.updateUser(request.getId(), request.getRole());
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }
