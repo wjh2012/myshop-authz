@@ -2,6 +2,7 @@ package ggomg.myshopauthz.tokenProvider.userAuthority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -18,9 +19,10 @@ public class User {
     private Long Id;
 
     @Column(name = "role")
-    private String role;
+    @Enumerated
+    private Role role;
 
-    public static User of(Long id, String role) {
+    public static User of(Long id, Role role) {
         return new User(id, role);
     }
 }

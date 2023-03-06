@@ -16,14 +16,14 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public void updateUser(Long id, String role) {
+    public void updateUser(Long id, Role role) {
         if (!userRepository.existsById(id)) {
             throw new IllegalArgumentException("Can't update. User not found");
         }
         userRepository.save(User.of(id, role));
     }
 
-    public void createUser(Long id, String role) {
+    public void createUser(Long id, Role role) {
         if (userRepository.existsById(id)) {
             throw new IllegalArgumentException("Can't create. User ID already exists");
         }

@@ -2,6 +2,7 @@ package ggomg.myshopauthz.tokenProvider;
 
 import static ggomg.myshopauthz.tokenProvider.key.KeyMaker.keyPair;
 
+import ggomg.myshopauthz.tokenProvider.userAuthority.Role;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.time.Instant;
@@ -16,7 +17,7 @@ public class TokenMaker {
     private static final Long ACCESS_TOKEN_TIME_SPAN = 60L * 60 * 1000; // 한 시간
     private static final Long REFRESH_TOKEN_TIME_SPAN = 60L * 60 * 24 * 30 * 1000; // 한 달
 
-    public static String createAccessToken(Long id, String role) {
+    public static String createAccessToken(Long id, Role role) {
         return Jwts.builder()
                 .setHeaderParam("alg", SignatureAlgorithm.RS256.getValue())
                 .setHeaderParam("typ", "JWT")
@@ -34,7 +35,7 @@ public class TokenMaker {
                 .compact();
     }
 
-    public static String createRefreshToken(Long id, String role) {
+    public static String createRefreshToken(Long id, Role role) {
         return Jwts.builder()
                 .setHeaderParam("alg", SignatureAlgorithm.RS256.getValue())
                 .setHeaderParam("typ", "JWT")
