@@ -1,6 +1,6 @@
 package ggomg.myshopauthz.tokenProvider;
 
-import static ggomg.myshopauthz.tokenProvider.key.KeyMaker.keyPair;
+import static ggomg.myshopauthz.tokenProvider.keyProvider.KeyMaker.keyPair;
 
 import ggomg.myshopauthz.tokenProvider.userAuthority.Role;
 import io.jsonwebtoken.Jwts;

@@ -1,6 +1,6 @@
 package ggomg.myshopauthz.tokenProvider.refreshToken;
 
-import static ggomg.myshopauthz.tokenProvider.key.KeyMaker.keyPair;
+import static ggomg.myshopauthz.tokenProvider.keyProvider.KeyMaker.keyPair;
 
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;

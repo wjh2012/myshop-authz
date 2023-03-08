@@ -1,24 +1,28 @@
-package ggomg.myshopauthz.tokenProvider.key;
+package ggomg.myshopauthz.tokenProvider.keyProvider;
 
-import static ggomg.myshopauthz.tokenProvider.key.KeyMaker.keyPair;
 
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class KeyProvideController {
+public class KeyProvider {
+
+    static KeyPair keyPair = Keys.keyPairFor(SignatureAlgorithm.RS256);
 
     @GetMapping("/publicKey")
-    public Result distributeKey() {
+    public ResponseEntity<Result<List<JWKey>>> distributeKey() {
         String key = Base64
                 .getEncoder()
                 .encodeToString(keyPair.getPublic().getEncoded());
@@ -34,17 +38,7 @@ public class KeyProvideController {
         List<JWKey> collect = new ArrayList<>();
         collect.add(jwKey);
 
-        return new Result(collect);
-    }
-
-    @Data
-    @Builder
-    static class JWKey {
-        String kid;
-        String alg;
-        String kty;
-        String use;
-        String publicKey;
+        return ResponseEntity.ok().body(new Result<>(collect));
     }
 
     @Data
