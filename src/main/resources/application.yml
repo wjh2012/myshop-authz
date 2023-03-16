@@ -3,10 +3,17 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/myshop_authz?serverTimezone=Asia/Seoul
-    username: root
-    password: 11111111
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    myshop-authz:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/myshop_authz?serverTimezone=Asia/Seoul
+      username: root
+      password: 11111111
+
+    myshop-key:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/myshop_key?serverTimezone=Asia/Seoul
+      username: root
+      password: 11111111
 
   redis:
     host: localhost
