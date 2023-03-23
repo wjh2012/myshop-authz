@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.tokenProvider.userAuthority;
+package ggomg.myshopauthz.token.userAuthority;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ public class UserController {
     @PostMapping("/createUser")
     public ResponseEntity<?> createUser(@RequestBody UserDTO request) {
         try {
-            userService.createUser(request.getId(), request.getRole());
+            userService.saveUser(request.getId(), request.getRole());
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

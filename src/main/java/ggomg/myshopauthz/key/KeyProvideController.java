@@ -1,9 +1,7 @@
-package ggomg.myshopauthz.tokenProvider.keyProvider;
+package ggomg.myshopauthz.key;
 
+import static ggomg.myshopauthz.key.TemporaryKey.keyPair;
 
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
-import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -17,12 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class KeyProvider {
-
-    static KeyPair keyPair = Keys.keyPairFor(SignatureAlgorithm.RS256);
+public class KeyProvideController {
 
     @GetMapping("/publicKey")
-    public ResponseEntity<Result<List<JWKey>>> distributeKey() {
+    public ResponseEntity<JWKS<List<JWKey>>> distributeKey() {
         String key = Base64
                 .getEncoder()
                 .encodeToString(keyPair.getPublic().getEncoded());
@@ -38,12 +34,12 @@ public class KeyProvider {
         List<JWKey> collect = new ArrayList<>();
         collect.add(jwKey);
 
-        return ResponseEntity.ok().body(new Result<>(collect));
+        return ResponseEntity.ok().body(new JWKS<>(collect));
     }
 
     @Data
     @AllArgsConstructor
-    static class Result<T> {
+    static class JWKS<T> {
         private T keys;
     }
 

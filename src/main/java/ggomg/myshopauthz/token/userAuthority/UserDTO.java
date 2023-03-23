@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.tokenProvider.userAuthority;
+package ggomg.myshopauthz.token.userAuthority;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.tokenProvider.userAuthority;
+package ggomg.myshopauthz.token.userAuthority;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class UserService {
         userRepository.save(User.of(id, role));
     }
 
-    public void createUser(Long id, Role role) {
+    public void saveUser(Long id, Role role) {
         if (userRepository.existsById(id)) {
             throw new IllegalArgumentException("Can't create. User ID already exists");
         }

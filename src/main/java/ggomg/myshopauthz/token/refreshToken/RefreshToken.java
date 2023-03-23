@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.tokenProvider.refreshToken;
+package ggomg.myshopauthz.token.refreshToken;
 
 import javax.persistence.Id;
 import lombok.AccessLevel;
@@ -12,13 +12,13 @@ import org.springframework.data.redis.core.RedisHash;
 @RedisHash("memberId")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserIdRefreshToken {
+public class RefreshToken {
     @Id
     private Long id;
     private String refreshToken;
 
-    public static UserIdRefreshToken of(Long userId, String refreshToken) {
-        return new UserIdRefreshToken(userId, refreshToken);
+    public static RefreshToken of(Long userId, String refreshToken) {
+        return new RefreshToken(userId, refreshToken);
     }
 
 }

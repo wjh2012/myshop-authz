@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.tokenProvider.keyProvider;
+package ggomg.myshopauthz.key;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,7 +1,7 @@
-package ggomg.myshopauthz.tokenProvider;
+package ggomg.myshopauthz.token;
 
-import ggomg.myshopauthz.tokenProvider.controllerDTO.CreateTokenRequest;
-import ggomg.myshopauthz.tokenProvider.refreshToken.RefreshTokenService;
+import ggomg.myshopauthz.token.RequestResponseDTO.CreateTokenRequest;
+import ggomg.myshopauthz.token.refreshToken.RefreshTokenService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class TokenController {
     @PostMapping("/refreshToken")
     public ResponseEntity<AccessRefreshTokenDTO> refreshToken(@RequestBody CreateTokenRequest request) {
 
-        refreshTokenService.findRefreshTokenById(request.getId());
+        refreshTokenService.findRefreshTokenByUserId(request.getId());
 
         String accessToken = tokenService.provideAccessToken(request.getId());
         String refreshToken = tokenService.provideRefreshToken(request.getId());
