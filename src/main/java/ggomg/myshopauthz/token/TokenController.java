@@ -1,8 +1,10 @@
 package ggomg.myshopauthz.token;
 
 import ggomg.myshopauthz.token.RequestResponseDTO.CreateTokenRequest;
-import ggomg.myshopauthz.token.refreshToken.RefreshTokenService;
-import lombok.AllArgsConstructor;
+import ggomg.myshopauthz.token.RequestResponseDTO.RefreshTokenRequest;
+import ggomg.myshopauthz.token.refreshToken.RefreshTokenStoreService;
+import io.jsonwebtoken.JwtException;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,36 +16,50 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class TokenController {
     private final TokenService tokenService;
-    private final RefreshTokenService refreshTokenService;
+    private final RefreshTokenStoreService refreshTokenStoreService;
 
-    @PostMapping("/newToken")
-    public ResponseEntity<AccessRefreshTokenDTO> newToken(@RequestBody CreateTokenRequest request) {
+    @PostMapping("/createToken")
+    public ResponseEntity<?> newToken(@RequestBody CreateTokenRequest createTokenRequest) {
 
-        String accessToken = tokenService.provideAccessToken(request.getId());
-        String refreshToken = tokenService.provideRefreshToken(request.getId());
+        String accessToken = tokenService.makeAccessToken(createTokenRequest.getId());
+        String refreshToken = tokenService.makeRefreshToken(createTokenRequest.getId());
 
-        refreshTokenService.saveRefreshToken(request.getId(), refreshToken);
+        refreshTokenStoreService.saveRefreshToken(createTokenRequest.getId(), refreshToken);
 
-        AccessRefreshTokenDTO response = new AccessRefreshTokenDTO(accessToken, refreshToken);
+        AccessRefreshTokenResponse response = new AccessRefreshTokenResponse(accessToken, refreshToken);
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/refreshToken")
-    public ResponseEntity<AccessRefreshTokenDTO> refreshToken(@RequestBody CreateTokenRequest request) {
+    @PostMapping("/accessToken")
+    public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
 
-        refreshTokenService.findRefreshTokenByUserId(request.getId());
+        String rawRefreshToken = refreshTokenRequest.getRefreshToken();
 
-        String accessToken = tokenService.provideAccessToken(request.getId());
-        String refreshToken = tokenService.provideRefreshToken(request.getId());
+        try {
+            Long userId = tokenService.parseUserIdFromToken(rawRefreshToken);
+            refreshTokenStoreService.validateToken(userId, rawRefreshToken);
 
-        AccessRefreshTokenDTO response = new AccessRefreshTokenDTO(accessToken, refreshToken);
+            String newAccessToken = tokenService.makeAccessToken(userId);
+            String newRefreshToken = tokenService.makeRefreshToken(userId);
 
-        return ResponseEntity.ok(response);
+            refreshTokenStoreService.saveRefreshToken(userId, newRefreshToken);
+
+            AccessRefreshTokenResponse response = new AccessRefreshTokenResponse(newAccessToken, newRefreshToken);
+            return ResponseEntity.ok(response);
+
+        } catch (JwtException e) {
+            // JWT 토큰이 유효하지 않거나 파싱 중에 문제가 발생한 경우
+            return ResponseEntity.badRequest().body(e.getMessage());
+
+        } catch (IllegalArgumentException e) {
+            // refreshTokenRequest 가 올바르지 않은 경우
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @Data
-    @AllArgsConstructor
-    static class AccessRefreshTokenDTO {
+    @Builder
+    static class AccessRefreshTokenResponse {
         private String accessToken;
         private String refreshToken;
     }
