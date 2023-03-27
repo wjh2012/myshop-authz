@@ -6,6 +6,7 @@ import static ggomg.myshopauthz.token.RawTokenMaker.createRawRefreshToken;
 
 import ggomg.myshopauthz.token.userAuthority.User;
 import ggomg.myshopauthz.token.userAuthority.UserRepository;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,28 +17,36 @@ public class TokenService {
 
     private final UserRepository userRepository;
 
-    public String provideAccessToken(Long id) {
+    public String makeAccessToken(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(IllegalArgumentException::new);
 
         return createRawAccessToken(user.getId(), user.getRole());
     }
 
-    public String provideRefreshToken(Long id) {
+    public String makeRefreshToken(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(IllegalArgumentException::new);
 
         return createRawRefreshToken(user.getId(), user.getRole());
     }
 
-    private String getUserIdFromRefreshToken(String refreshToken) {
-        return Jwts.parserBuilder()
-                .setSigningKey(keyPair.getPublic())
-                .requireAudience("refreshService")
-                .build()
-                .parseClaimsJws(refreshToken)
-                .getBody()
-                .getSubject();
+
+    public Long parseUserIdFromToken(String token) {
+        try {
+            String subject = Jwts.parserBuilder()
+                    .setSigningKey(keyPair.getPublic())
+                    .requireAudience("refreshService")
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();
+            return Long.parseLong(subject);
+        } catch (JwtException e) {
+            throw new JwtException("Invalid token or parsing error occurred", e);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Invalid user ID format in token");
+        }
     }
 
 }
