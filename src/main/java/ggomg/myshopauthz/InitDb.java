@@ -1,6 +1,6 @@
 package ggomg.myshopauthz;
 
-import ggomg.myshopauthz.token.refreshToken.RefreshTokenService;
+import ggomg.myshopauthz.token.refreshToken.RefreshTokenStoreService;
 import ggomg.myshopauthz.token.userAuthority.Role;
 import ggomg.myshopauthz.token.userAuthority.UserService;
 import javax.annotation.PostConstruct;
@@ -38,7 +38,7 @@ public class InitDb {
     @RequiredArgsConstructor
     static class InitRedis {
 
-        private final RefreshTokenService refreshTokenService;
+        private final RefreshTokenStoreService refreshTokenStoreService;
 
         private void dbInit() {
         }

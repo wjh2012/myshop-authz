@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class AccessTokenRequest {
+public class RefreshTokenRequest {
     private String refreshToken;
 }

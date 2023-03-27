@@ -52,4 +52,5 @@ public class RawTokenMaker {
                 .signWith(keyPair.getPrivate())
                 .compact();
     }
+
 }
