@@ -1,5 +1,7 @@
 package ggomg.myshopauthz.token.userAuthority;
 
+import ggomg.myshopauthz.token.userAuthority.role.Role;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,24 +11,31 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public void deleteUser(Long id) {
+    private void checkUserExists(Long id) {
         if (!userRepository.existsById(id)) {
-            throw new IllegalArgumentException("Can't delete. User not found");
+            throw new IllegalArgumentException("User ID not exists");
         }
-        userRepository.deleteById(id);
     }
 
-    public void updateUser(Long id, Role role) {
-        if (!userRepository.existsById(id)) {
-            throw new IllegalArgumentException("Can't update. User not found");
-        }
-        userRepository.save(User.of(id, role));
+    public Optional<User> findUser(Long id) {
+        return userRepository.findById(id);
     }
 
     public void saveUser(Long id, Role role) {
         if (userRepository.existsById(id)) {
-            throw new IllegalArgumentException("Can't create. User ID already exists");
+            throw new IllegalArgumentException("User ID already exists");
         }
         userRepository.save(User.of(id, role));
     }
+
+    public void deleteUser(Long id) {
+        checkUserExists(id);
+        userRepository.deleteById(id);
+    }
+
+    public void updateUser(Long id, Role role) {
+        checkUserExists(id);
+        userRepository.save(User.of(id, role));
+    }
+
 }

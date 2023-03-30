@@ -1,7 +1,7 @@
 package ggomg.myshopauthz.token;
 
 import ggomg.myshopauthz.token.refreshToken.RefreshTokenStoreService;
-import ggomg.myshopauthz.token.userAuthority.Role;
+import ggomg.myshopauthz.token.userAuthority.role.Role;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

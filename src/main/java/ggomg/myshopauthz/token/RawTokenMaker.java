@@ -2,7 +2,7 @@ package ggomg.myshopauthz.token;
 
 import static ggomg.myshopauthz.key.TemporaryKey.keyPair;
 
-import ggomg.myshopauthz.token.userAuthority.Role;
+import ggomg.myshopauthz.token.userAuthority.role.Role;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.time.Instant;

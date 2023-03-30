@@ -1,5 +1,6 @@
 package ggomg.myshopauthz.token.userAuthority;
 
+import ggomg.myshopauthz.token.userAuthority.role.Role;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;

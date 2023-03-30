@@ -19,7 +19,7 @@ public class TokenController {
     private final RefreshTokenStoreService refreshTokenStoreService;
 
     @PostMapping("/createToken")
-    public ResponseEntity<?> newToken(@RequestBody CreateTokenRequest createTokenRequest) {
+    public ResponseEntity<AccessRefreshTokenResponse> newToken(@RequestBody CreateTokenRequest createTokenRequest) {
 
         String accessToken = tokenService.makeAccessToken(createTokenRequest.getId());
         String refreshToken = tokenService.makeRefreshToken(createTokenRequest.getId());
