@@ -1,5 +1,6 @@
 package ggomg.myshopauthz.token.userAuthority;
 
+import com.sun.istack.NotNull;
 import ggomg.myshopauthz.token.userAuthority.role.Role;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +22,7 @@ public class User {
 
     @Column(name = "role")
     @Enumerated
+    @NotNull
     private Role role;
 
     public static User of(Long id, Role role) {

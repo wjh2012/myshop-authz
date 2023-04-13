@@ -8,6 +8,7 @@ import ggomg.myshopauthz.token.userAuthority.User;
 import ggomg.myshopauthz.token.userAuthority.UserService;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +20,14 @@ public class TokenService {
 
     public String makeAccessToken(Long id) {
         User user = userService.findUser(id)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(NoSuchElementException::new);
 
         return createRawAccessToken(user.getId(), user.getRole());
     }
 
     public String makeRefreshToken(Long id) {
         User user = userService.findUser(id)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(NoSuchElementException::new);
 
         return createRawRefreshToken(user.getId(), user.getRole());
     }
