@@ -43,3 +43,8 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootJar{
+	archivesBaseName = 'myshop_authz'
+	archiveFileName = 'myshop_authz.jar'
+}
