@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.token.userAuthority;
+package ggomg.myshopauthz.user;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.token.userAuthority;
+package ggomg.myshopauthz.user;
 
 import com.sun.istack.NotNull;
 import ggomg.myshopauthz.token.userAuthority.role.Role;

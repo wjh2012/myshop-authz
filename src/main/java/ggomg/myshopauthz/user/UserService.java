@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.token.userAuthority;
+package ggomg.myshopauthz.user;
 
 import ggomg.myshopauthz.token.userAuthority.role.Role;
 import java.util.Optional;
