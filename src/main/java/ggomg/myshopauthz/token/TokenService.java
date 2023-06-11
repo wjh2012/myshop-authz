@@ -4,8 +4,8 @@ import static ggomg.myshopauthz.key.TemporaryKey.keyPair;
 import static ggomg.myshopauthz.token.RawTokenMaker.createRawAccessToken;
 import static ggomg.myshopauthz.token.RawTokenMaker.createRawRefreshToken;
 
-import ggomg.myshopauthz.token.userAuthority.User;
-import ggomg.myshopauthz.token.userAuthority.UserService;
+import ggomg.myshopauthz.user.User;
+import ggomg.myshopauthz.user.UserService;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import java.util.NoSuchElementException;

@@ -1,4 +1,4 @@
-package ggomg.myshopauthz.token.userAuthority;
+package ggomg.myshopauthz.user;
 
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ public class UserController {
 
     @PostMapping("/createUser")
     public ResponseEntity<?> createUser(@Validated @RequestBody UserDTO request) {
-        userService.saveUser(request.getId(), request.getRole());
+        userService.createUser(request.getId(), request.getRole());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
