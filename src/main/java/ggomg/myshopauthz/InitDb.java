@@ -1,8 +1,8 @@
 package ggomg.myshopauthz;
 
 import ggomg.myshopauthz.token.refreshToken.RefreshTokenStoreService;
-import ggomg.myshopauthz.token.userAuthority.UserService;
-import ggomg.myshopauthz.token.userAuthority.role.Role;
+import ggomg.myshopauthz.user.Role;
+import ggomg.myshopauthz.user.UserService;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -28,9 +28,9 @@ public class InitDb {
         private final UserService userService;
 
         private void dbInit() {
-            userService.saveUser(1L, Role.NORMAL);
-            userService.saveUser(2L, Role.MANAGER);
-            userService.saveUser(3L, Role.MANAGER);
+            userService.createUser(1L, Role.NORMAL);
+            userService.createUser(2L, Role.MANAGER);
+            userService.createUser(3L, Role.MANAGER);
         }
     }
 

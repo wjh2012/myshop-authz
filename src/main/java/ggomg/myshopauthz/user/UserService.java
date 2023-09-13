@@ -1,6 +1,5 @@
 package ggomg.myshopauthz.user;
 
-import ggomg.myshopauthz.token.userAuthority.role.Role;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public void saveUser(Long id, Role role) {
+    public void createUser(Long id, Role role) {
         if (userRepository.existsById(id)) {
             throw new IllegalArgumentException("User ID already exists");
         }
