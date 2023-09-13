@@ -18,7 +18,7 @@
 - KeyProvideController로 public key 배포(JWK)
 
 ## 🚀배포
-- CI : github
-- CD : JENKINS
+- CI : Github
+- CD : Jenkins
 - AWS EC2
 - Docker
