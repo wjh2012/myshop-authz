@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class User {
 
     @Id
-    private Long Id;
+    private Long id;
 
     @Column(name = "role")
     @Enumerated
